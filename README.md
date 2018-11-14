@@ -4,84 +4,27 @@
 
 ## 01. Getting Started
 
+``` bash
+# go to 01_getting_started
+cd 01_getting_started/
+# build and run 
+go build && ./main
+```
+
 ## 001. REST API with MUX Part 1
+
+``` bash
+# go to 001_rest_api_with_mux_part1
+cd 001_rest_api_with_mux_part1/
+# build and run 
+go build && ./rest_api
+```
 
 ## 002. REST API with MUX Part 2    
 
-
-
-# Simple GO Lang REST API
-
-> Simple RESTful API to create, read, update and delete books. No database implementation yet
-
-## Quick Start
-
-
 ``` bash
-# Install mux router
-go get -u github.com/gorilla/mux
+# go to 001_rest_api_with_mux_part2
+cd 002_rest_api_with_mux_part2/
+# build and run 
+go build && ./rest_api
 ```
-
-``` bash
-go build
-./go_restapi
-```
-
-## Endpoints
-
-### Get All Books
-``` bash
-GET api/books
-```
-### Get Single Book
-``` bash
-GET api/books/{id}
-```
-
-### Delete Book
-``` bash
-DELETE api/books/{id}
-```
-
-### Create Book
-``` bash
-POST api/books
-
-# Request sample
-# {
-#   "isbn":"4545454",
-#   "title":"Book Three",
-#   "author":{"firstname":"Harry",  "lastname":"White"}
-# }
-```
-
-### Update Book
-``` bash
-PUT api/books/{id}
-
-# Request sample
-# {
-#   "isbn":"4545454",
-#   "title":"Updated Title",
-#   "author":{"firstname":"Harry",  "lastname":"White"}
-# }
-
-```
-
-
-```
-
-## App Info
-
-### Author
-
-Brad Traversy
-[Traversy Media](http://www.traversymedia.com)
-
-### Version
-
-1.0.0
-
-### License
-
-This project is licensed under the MIT License
