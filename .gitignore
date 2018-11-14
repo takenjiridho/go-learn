@@ -1,3 +1,8 @@
+#ignore everything except .go files, and works for subdirectories
+**/*
+!**/*.go
+!**/
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
