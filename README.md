@@ -7,6 +7,10 @@
 ``` bash
 # go to 01_getting_started
 cd 01_getting_started/
+
+#Install mux router
+go get -u github.com/gorilla/mux
+
 # build and run 
 go build && ./main
 ```
