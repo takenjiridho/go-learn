@@ -28,18 +28,19 @@ DELETE api/cars/{id}
 POST api/cars
 
 # Request sample
-{
-    "manufacture": "Daihatsu",
-    "product": "Terrios",
-    "year": "2015",
-    "engine": "15L",
-    "model": {
-        "code": "1TR",
-        "type": "Advanture",
-        "price": "230 jt",
-        "color": "White"
-    }
-}
+#{
+#    "manufacture": "Daihatsu",
+#    "product": "Terrios",
+#    "year": "2015",
+#    "engine": "15L",
+#    "model": {
+#        "code": "1TR",
+#        "type": "Advanture",
+#        "price": "230 jt",
+#        "color": "White"
+#    }
+#}
+
 ```
 
 ### Update Car
@@ -47,18 +48,18 @@ POST api/cars
 PUT api/cars/{id}
 
 # Request sample
-{
-        "id": "887",
-        "manufacture": "Daihatsu",
-        "product": "Terrios",
-        "year": "2014",
-        "engine": "15L",
-        "model": {
-            "code": "1TR",
-            "type": "TX",
-            "price": "130 jt",
-            "color": "Black"
-        }
-    }
+#{
+#        "id": "887",
+#        "manufacture": "Daihatsu",
+#        "product": "Terrios",
+#        "year": "2014",
+#        "engine": "15L",
+#        "model": {
+#            "code": "1TR",
+#            "type": "TX",
+#            "price": "130 jt",
+#            "color": "Black"
+#        }
+#    }
 
 ```
