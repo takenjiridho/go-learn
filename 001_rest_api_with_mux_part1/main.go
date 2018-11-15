@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -30,16 +32,20 @@ type Model struct {
 // initiate car var as a slice car struc
 var cars []Car
 
+// get all cars
 func getCars(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("sameone call me in rest api getCars")
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(cars)
 }
 
+// get specific car
 func getCar(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("sameone call me in rest api getCars")
+	fmt.Println("sameone call me in rest api getCar")
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r) // get param from browser
+
+	fmt.Println("params id is : ", params["id"])
 
 	for _, item := range cars {
 		if item.ID == params["id"] {
@@ -51,14 +57,45 @@ func getCar(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(&Car{})
 }
 
+// add new car
 func createCars(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("sameone call me in rest api createCars")
+	w.Header().Set("Content-Type", "application/json")
+	var car Car
+	_ = json.NewDecoder(r.Body).Decode(&car)
+	car.ID = strconv.Itoa(rand.Intn(1000))
+	cars = append(cars, car)
+	json.NewEncoder(w).Encode(car)
 
 }
-
 func updateCars(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("sameone call me in rest api updateCars")
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	for i, item := range cars {
+		if item.ID == params["id"] {
+			cars = append(cars[:i], cars[i+1:]...)
+			var car Car
+			_ = json.NewDecoder(r.Body).Decode(&car)
+			car.ID = params["id"]
+			cars = append(cars, car)
+			json.NewEncoder(w).Encode(car)
+		}
+	}
 
 }
 func deleteCars(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("sameone call me in rest api updateCars")
+	w.Header().Set("Content-TYpe", "application/json")
+	params := mux.Vars(r)
+
+	for i, item := range cars {
+		if item.ID == params["id"] {
+			cars = append(cars[:i], cars[i+1:]...)
+			break
+		}
+	}
+	json.NewEncoder(w).Encode(cars)
 
 }
 
@@ -79,11 +116,11 @@ func main() {
 	cars = append(cars, Car{ID: "3", Manufacture: "Toyota", Product: "DX", Year: "1990", Engine: "15L", Model: &Model{Code: "1DX", Type: "QuardLamp", Price: "20 jt", Color: "Red"}})
 
 	// route and handle endpoint
-	r.HandleFunc("/cars", getCars).Methods("GET")
-	r.HandleFunc("/cars/{id}", getCar).Methods("GET")
-	r.HandleFunc("/cars", createCars).Methods("POST")
-	r.HandleFunc("/cars/{id}", updateCars).Methods("PUT")
-	r.HandleFunc("/cars/{id}", deleteCars).Methods("DELETE")
+	r.HandleFunc("/api/cars", getCars).Methods("GET")
+	r.HandleFunc("/api//cars/{id}", getCar).Methods("GET")
+	r.HandleFunc("/api/cars", createCars).Methods("POST")
+	r.HandleFunc("/api/cars/{id}", updateCars).Methods("PUT")
+	r.HandleFunc("/api/cars/{id}", deleteCars).Methods("DELETE")
 
 	// start server
 	log.Fatal(http.ListenAndServe(":8888", r))
