@@ -31,9 +31,26 @@ func main() {
 	for {
 
 		l++
-		fmt.Printf("l %d\n", l)
+		fmt.Printf("break l  %d\n", l)
 
 		if l == 5 {
+			break
+		}
+	}
+
+	c := 0
+
+	for {
+
+		c++
+
+		if c == 5 {
+			continue
+		}
+
+		fmt.Printf("continue l %d\n", c)
+
+		if c == 10 {
 			break
 		}
 	}
