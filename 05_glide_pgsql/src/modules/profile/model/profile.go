@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-//Profile
+//Profile struct
 type Profile struct {
 	ID        string
 	FirstName string
@@ -13,9 +13,10 @@ type Profile struct {
 	UpdatedAt time.Time
 }
 
+// pProfiles
 type Profiles []Profile
 
-//
+// nNewProfile()
 func NewProfile() *Profile {
 	return &Profile{
 		CreatedAt: time.Now(),
