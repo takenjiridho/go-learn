@@ -1,0 +1,4 @@
+package: .
+import:
+- package: github.com/lib/pq
+  version: v1.0.0

@@ -1,0 +1,9 @@
+CREATE TABLE profile(
+  id VARCHAR(10) UNIQUE PRIMARY KEY NOT NULL,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50),
+  email VARCHAR(50) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE,
+  updated_at TIMESTAMP WITH TIME ZONE
+);
