@@ -23,7 +23,7 @@ func main() {
 	profileImpl := repository.NewProfileImpl(db)
 
 	f := model.NewProfile()
-	f.ID = "P3"
+	f.ID = "P4"
 	f.FirstName = "farid"
 	f.LastName = "wjd"
 	f.Email = "farid@gmail.com"
