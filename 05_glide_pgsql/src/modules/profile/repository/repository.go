@@ -5,7 +5,7 @@ import(
 )
 
 // pProfileRepository(_, _)
-func ProfileRepository interface{
+func ProfileRepository interface {
   Save(*model.Profile) error
   Update(string, *model.Profile) error
   Delete(string) error
