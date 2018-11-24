@@ -1,0 +1,7 @@
+package: go-learn/12_glide_pgsql_gorm
+import:
+- package: github.com/jinzhu/gorm
+  version: v1.9.1
+- package: github.com/lib/pq
+  version: v1.0.0
+- package: github.com/jinzhu/inflection

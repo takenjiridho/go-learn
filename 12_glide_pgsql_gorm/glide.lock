@@ -1,0 +1,15 @@
+hash: 6d944b906713578fa6c9c6c87081751712607a57641b8b5d874093c777f84e7f
+updated: 2018-11-24T06:42:26.767097+07:00
+imports:
+- name: github.com/jinzhu/gorm
+  version: 6ed508ec6a4ecb3531899a69cbc746ccf65a4166
+  subpackages:
+  - dialects/postgres
+- name: github.com/jinzhu/inflection
+  version: 04140366298a54a039076d798123ffa108fff46c
+- name: github.com/lib/pq
+  version: 4ded0e9383f75c197b3a2aaa6d590ac52df6fd79
+  subpackages:
+  - hstore
+  - oid
+testImports: []
