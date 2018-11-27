@@ -22,24 +22,26 @@ func main() {
 
 	profileImpl := repository.NewProfileImpl(db)
 
-	f := model.NewProfile()
-	f.ID = "P4"
-	f.FirstName = "farid"
-	f.LastName = "wjd"
-	f.Email = "farid@gmail.com"
-	f.Password = "123456"
+	// f := model.NewProfile()
+	// f.ID = "P4"
+	// f.FirstName = "farid"
+	// f.LastName = "wjd"
+	// f.Email = "farid@gmail.com"
+	// f.Password = "123456"
 
-	b, err := saveProfile(f, profileImpl)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fmt.Println("message : ", b)
-
-	// profile, err := getProfile("P2", profileImpl)
+	// b, err := saveProfile(f, profileImpl)
 	// if err != nil {
 	// 	fmt.Println(err)
 	// }
+	//
+	// fmt.Println("message : ", b)
+
+	// profile, err := getProfile("P2", profileImpl)
+	//
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+	//
 	// fmt.Println("ID : ", profile.ID, "Nama :  ", profile.FirstName, profile.LastName, " Email : ", profile.Email)
 
 	// u := model.NewProfile()
@@ -83,11 +85,15 @@ func main() {
 func saveProfile(p *model.Profile, r repository.ProfileRepository) (string, error) {
 	err := r.Save(p)
 
+	b := ""
+
 	if err != nil {
-		return "", err
+		b = err.Error()
+		return b, err
+
 	}
 
-	b := "data berhasil diinsert kan bang!!!"
+	b = "data berhasil diinsert kan bang!!!"
 
 	return b, err
 }

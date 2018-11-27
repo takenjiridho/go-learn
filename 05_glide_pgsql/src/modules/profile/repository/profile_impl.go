@@ -76,7 +76,7 @@ func (r *profileImpl) Delete(id string) error {
 }
 
 func (r *profileImpl) FindByID(id string) (*model.Profile, error) {
-	query := `SELECT * FROM "profile" where "id"=$1`
+	query := `SELECT id, first_name, last_name, email, password, created_at, updated_at  FROM "profile" where "id"=$1`
 
 	var profile model.Profile
 
@@ -99,7 +99,7 @@ func (r *profileImpl) FindByID(id string) (*model.Profile, error) {
 }
 
 func (r *profileImpl) FindAll() (model.Profiles, error) {
-	query := `SELECT * FROM "profile"`
+	query := `SELECT id, first_name, last_name, email, password, created_at, updated_at FROM "profile"`
 
 	var profiles model.Profiles
 
@@ -116,6 +116,8 @@ func (r *profileImpl) FindAll() (model.Profiles, error) {
 		var profile model.Profile
 
 		err = rows.Scan(&profile.ID, &profile.FirstName, &profile.LastName, &profile.Email, &profile.Password, &profile.CreatedAt, &profile.UpdatedAt)
+
+		// fmt.Println(" nama ", profile.FirstName)
 
 		profiles = append(profiles, profile)
 	}

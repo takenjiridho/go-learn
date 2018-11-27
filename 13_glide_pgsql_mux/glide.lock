@@ -1,0 +1,8 @@
+hash: 6c6cc0bea8d8d12479fe79c1657c791e70c372c71c78e13d09dbd0361538ed44
+updated: 2018-11-27T06:32:41.8151+07:00
+imports:
+- name: github.com/gorilla/mux
+  version: e3702bed27f0d39777b0b37b664b6280e8ef8fbf
+- name: github.com/lib/pq
+  version: 4ded0e9383f75c197b3a2aaa6d590ac52df6fd79
+testImports: []
