@@ -11,6 +11,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
+//
+// type Result struct {
+// 	Car     *Car   `json:result`
+// 	Message string `json:message`
+// 	Status  string `json:status`
+// }
+
 // car struct
 type Car struct {
 	ID          string `json:"id"`
@@ -31,6 +38,8 @@ type Model struct {
 
 // initiate car var as a slice car struc
 var cars []Car
+
+// var results []Result
 
 // get all cars
 func getCars(w http.ResponseWriter, r *http.Request) {
@@ -115,6 +124,8 @@ func main() {
 	cars = append(cars, Car{ID: "1", Manufacture: "Honda", Product: "CRV", Year: "2018", Engine: "20L", Model: &Model{Code: "1CRV", Type: "Facelift", Price: "500 jt", Color: "white"}})
 	cars = append(cars, Car{ID: "2", Manufacture: "Honda", Product: "HRV", Year: "2018", Engine: "15L", Model: &Model{Code: "1HRV", Type: "Facelift", Price: "300 jt", Color: "Red"}})
 	cars = append(cars, Car{ID: "3", Manufacture: "Toyota", Product: "DX", Year: "1990", Engine: "15L", Model: &Model{Code: "1DX", Type: "QuardLamp", Price: "20 jt", Color: "Red"}})
+
+	// results = append(results, Result{Car: cars, Message: "Success", Status: "Success"})
 
 	// route and handle endpoint
 	r.HandleFunc("/api/cars", getCars).Methods("GET")
