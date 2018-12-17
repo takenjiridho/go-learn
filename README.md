@@ -36,4 +36,6 @@ go build -o rest_api && ./rest_api
 ### remove .git mac
 ```
 find . | grep .git | xargs rm -rf
+
+
 ```
