@@ -1,0 +1,36 @@
+<div class="col-md-12">
+  <div class="jumbotron">
+    <h1 class="display-4">The Book Store</h1>
+    <p class="lead">This is a Full Stack book store.</p>
+    <hr class="my-4">
+    <p>You will be able to store your software development books here.</p>
+    <button type="button" class="btn btn-primary btn-lg" (click)="addBook()">Add a new book</button>
+  </div>
+  <div class="inner">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="hidden">Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books">
+            <td>{{book.id}}</td>
+            <td>{{book.title}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.year}}</td>
+            <td>
+              <button type="button" class="btn btn-action btn-danger" (click)="deleteBook(book)">Delete</button>
+              <button type="button" class="btn btn-action btn-primary" (click)="editBook(book)">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

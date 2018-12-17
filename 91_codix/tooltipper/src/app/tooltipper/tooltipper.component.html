@@ -1,0 +1,37 @@
+<div class="tooltipper">
+  <div class="jumbotron info-section">
+    <div class="row">
+      <div class="col-sm-6">
+        <ul class="info-btns-list" (clickOutside)="onClickedOutside($event)">
+          <li class="info-btns-list-item">
+            <ng-template #tipContent1 id="notifications-label1" let-info="info">{{info}}</ng-template>
+              <button type="button"
+                [ngbTooltip]="tipContent1"
+                #t="ngbTooltip"
+                triggers="manual"
+                aria-labelledby="notifications-label1"
+                class="btn btn-outline-secondary mr-2"
+                (click)="showInfo({  name: 'A' })">
+                Button A
+              </button>
+          </li>
+          <li class="info-btns-list-item">
+            <ng-template #tipContent2 id="notifications-label2" let-info="info">{{info}}</ng-template>
+            <button type="button"
+              [ngbTooltip]="tipContent2"
+              #y="ngbTooltip"
+              triggers="manual"
+              aria-labelledby="notifications-label2"
+              class="btn btn-outline-secondary mr-2"
+              (click)="showInfo({ name: 'B' })">
+              Button B
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <p class="desc">Scroll up to the top edge and click on buttons to see placement effect and press ESC key to close tooltips.</p>
+      </div>
+    </div>
+  </div>
+</div>
