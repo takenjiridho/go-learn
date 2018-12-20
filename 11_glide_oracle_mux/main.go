@@ -15,7 +15,7 @@ func init() {
 }
 
 func main() {
-
+	// jdbc:oracle:thin:@192.168.100.75:1521:devicms
 	fmt.Println("glide oracle mux")
 
 	db = driver.ConnectDB()
