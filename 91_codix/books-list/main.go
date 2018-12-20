@@ -2,9 +2,9 @@ package main
 
 import (
 	"database/sql"
-	"go-resources/codixir/books-list/controllers"
-	"go-resources/codixir/books-list/driver"
-	"go-resources/codixir/books-list/models"
+	"go-learn/91_codix/books-list/controllers"
+	"go-learn/91_codix/books-list/driver"
+	"go-learn/91_codix/books-list/models"
 	"log"
 	"net/http"
 
@@ -27,6 +27,7 @@ func logFatal(err error) {
 
 func main() {
 	db = driver.ConnectDB()
+
 	router := mux.NewRouter()
 
 	controller := controllers.Controller{}

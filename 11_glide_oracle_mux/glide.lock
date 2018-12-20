@@ -1,0 +1,10 @@
+hash: 10f48b3ee8b1f34c63349117c4af042865607460314e2a9be86f86f01e0c6828
+updated: 2018-12-20T19:24:02.030714+07:00
+imports:
+- name: github.com/pkg/errors
+  version: 059132a15dd08d6704c67711dae0cf35ab991756
+- name: github.com/subosito/gotenv
+  version: 69b5b6104433beb2cb9c3ce00bdadf3c7c2d3f34
+- name: gopkg.in/goracle.v2
+  version: 9eac426a85970e972d921632b949d758834c0b7f
+testImports: []
