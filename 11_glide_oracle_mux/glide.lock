@@ -1,6 +1,8 @@
-hash: 10f48b3ee8b1f34c63349117c4af042865607460314e2a9be86f86f01e0c6828
-updated: 2018-12-20T19:24:02.030714+07:00
+hash: a8a96bb198264adedf8a272d4db83023ba16b905eee74689ea1c0e6245735e26
+updated: 2018-12-21T06:31:50.760426+07:00
 imports:
+- name: github.com/mattn/go-oci8
+  version: 247e199a1d6bd2e0de63501ab85a8548203788c0
 - name: github.com/pkg/errors
   version: 059132a15dd08d6704c67711dae0cf35ab991756
 - name: github.com/subosito/gotenv
