@@ -14,6 +14,10 @@ import (
 var schedules []models.Schedule
 
 type Controller struct{}
+type Q struct {
+	Thbl           string `json:"thbl"`
+	Org_id_pemasok string `json:"org_id_pemasok"`
+}
 
 func logFatal(err error) {
 	if err != nil {
@@ -45,41 +49,28 @@ func (c Controller) GetMonitoring(db *sql.DB) http.HandlerFunc {
 // GetMonitoringByOrgIdThbl
 func (c Controller) GetMonitoringByOrgIdThbl(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var q models.Schedule
 
 		w.Header().Set("Content-Type", "application/json")
 		fmt.Println("load ... GetMonitoringByOrgIdThbl ")
 
-		var data2 interface{}
 		body, err := ioutil.ReadAll(r.Body)
+
+		var jsonData = []byte(body)
+
+		var data Q
+
+		err = json.Unmarshal(jsonData, &data)
 		if err != nil {
-			panic(err)
+			fmt.Println(err.Error())
+			return
 		}
-		log.Println(string(body))
-		err = json.Unmarshal(body, &data2)
-		if err != nil {
-			panic(err)
-		}
-		// log.Println()
 
-		var decodedData = data2.(map[string]interface{})
-		fmt.Println("thbl :", decodedData["thbl"])
-		fmt.Println("org_id_pemasok  :", decodedData["org_id_pemasok"])
-
-		// thbl, err := strconv.Atoi(decodedData["thbl"])
-		// logFatal(err)
-
-		// var schedule models.Schedule
-		// json.NewDecoder(r.Body).Decode(&schedule)
-
-		q.Org_id_pemasok = decodedData["org_id_pemasok"]
-		q.Thbl = decodedData["thbl"]
+		fmt.Println("org_id_pemasok :", data.Org_id_pemasok)
+		fmt.Println("thbl  :", data.Thbl)
 
 		schedules = []models.Schedule{}
 		scheedulRepo := scheduleRepository.ScheduleRepository{}
-
-		// book = bookRepo.GetBook(db, book, id)
-		json.NewEncoder(w).Encode(scheedulRepo.GetScheuldeByOrgId(db, q))
+		json.NewEncoder(w).Encode(scheedulRepo.GetScheuldeByOrgId(db, data.Org_id_pemasok, data.Thbl))
 
 	}
 }

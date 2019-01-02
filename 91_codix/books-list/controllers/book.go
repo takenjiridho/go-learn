@@ -3,8 +3,8 @@ package controllers
 import (
 	"database/sql"
 	"encoding/json"
-	"go-resources/codixir/books-list/models"
-	"go-resources/codixir/books-list/repository/book"
+	"go-learn/91_codix/books-list/models"
+	"go-learn/91_codix/books-list/repository/book"
 	"log"
 	"net/http"
 	"strconv"

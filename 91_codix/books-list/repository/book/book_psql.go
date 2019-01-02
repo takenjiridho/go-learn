@@ -3,7 +3,7 @@ package bookRepository
 import (
 	"database/sql"
 	"fmt"
-	"go-resources/codixir/books-list/models"
+	"go-learn/91_codix/books-list/models"
 	"log"
 )
 

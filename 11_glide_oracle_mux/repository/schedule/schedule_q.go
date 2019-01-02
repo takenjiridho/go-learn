@@ -2,6 +2,7 @@ package scheduleRepository
 
 import (
 	"database/sql"
+	"fmt"
 	"go-learn/11_glide_oracle_mux/models"
 	"log"
 )
@@ -39,16 +40,17 @@ func (b ScheduleRepository) GetScheuldes(db *sql.DB, schedule models.Schedule, s
 }
 
 // GetScheuldeByOrgId
-func (b ScheduleRepository) GetScheuldeByOrgId(db *sql.DB, vorg_id string, vthbl int) models.ReturnData {
+func (b ScheduleRepository) GetScheuldeByOrgId(db *sql.DB, vorg_id string, vthbl string) models.ReturnData {
 	rows, err := db.Query("select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=$1 and org_id_pemasok=$2", vthbl, vorg_id)
 	logFatal(err)
 	defer rows.Close()
+
 	var v models.ReturnData
 
 	for rows.Next() {
 		var c models.Schedule
 
-		err := rows.Scan(&c.TRX_ID, &c.Org_id_pemasok, &c.Volume, &c.Thbl)
+		err = rows.Scan(&c.TRX_ID, &c.Org_id_pemasok, &c.Volume, &c.Thbl)
 		if err != nil {
 			v.Status = err.Error()
 		} else {
@@ -56,6 +58,10 @@ func (b ScheduleRepository) GetScheuldeByOrgId(db *sql.DB, vorg_id string, vthbl
 		}
 
 		v.Data = append(v.Data, c)
+	}
+
+	if err = rows.Err(); err != nil {
+		fmt.Println(err.Error())
 	}
 
 	return v
