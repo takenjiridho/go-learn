@@ -14,10 +14,6 @@ import (
 var schedules []models.Schedule
 
 type Controller struct{}
-type Q struct {
-	Thbl           string `json:"thbl"`
-	Org_id_pemasok string `json:"org_id_pemasok"`
-}
 
 func logFatal(err error) {
 	if err != nil {
@@ -57,20 +53,19 @@ func (c Controller) GetMonitoringByOrgIdThbl(db *sql.DB) http.HandlerFunc {
 
 		var jsonData = []byte(body)
 
-		var data Q
+		var data models.Q
 
 		err = json.Unmarshal(jsonData, &data)
 		if err != nil {
 			fmt.Println(err.Error())
-			return
 		}
 
-		fmt.Println("org_id_pemasok :", data.Org_id_pemasok)
-		fmt.Println("thbl  :", data.Thbl)
+		// fmt.Println("org_id_pemasok :", data.Org_id_pemasok)
+		// fmt.Println("thbl  :", data.Thbl)
 
 		schedules = []models.Schedule{}
 		scheedulRepo := scheduleRepository.ScheduleRepository{}
-		json.NewEncoder(w).Encode(scheedulRepo.GetScheuldeByOrgId(db, data.Org_id_pemasok, data.Thbl))
+		json.NewEncoder(w).Encode(scheedulRepo.GetScheuldeByOrgId(db, schedules, data.Org_id_pemasok, data.Thbl))
 
 	}
 }

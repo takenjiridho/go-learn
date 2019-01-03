@@ -11,8 +11,8 @@ type ScheduleRepository struct{}
 
 func logFatal(err error) {
 	if err != nil && err != sql.ErrNoRows {
-		log.Fatal(err)
-		// log.Panic(err)
+		// log.Fatal(err)
+		log.Panic(err)
 	}
 }
 
@@ -39,31 +39,79 @@ func (b ScheduleRepository) GetScheuldes(db *sql.DB, schedule models.Schedule, s
 	return v
 }
 
-// GetScheuldeByOrgId
-func (b ScheduleRepository) GetScheuldeByOrgId(db *sql.DB, vorg_id string, vthbl string) models.ReturnData {
-	rows, err := db.Query("select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=$1 and org_id_pemasok=$2", vthbl, vorg_id)
+// GetScheuldes
+func (b ScheduleRepository) GetScheuldeByOrgId(db *sql.DB, schedules []models.Schedule, vorg_id string, vthbl string) models.ReturnData {
+	fmt.Println(" thbl : ", vthbl)
+	fmt.Println("org id :", vorg_id)
+
+	t := vthbl
+	o := vorg_id
+
+	// rows, err := db.Query("select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=? and org_id_pemasok=?", t, o)
+	// rows, err := db.Query("select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=? and org_id_pemasok='20PBB'", t)
+	rows, err := db.Query(fmt.Sprintf("select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=? and org_id_pemasok=?"), t, o)
+
+	// query := "select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=$1 and org_id_pemasok=$2"
+	// 	query := "select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl='201811' and org_id_pemasok='20PBB'"
+	// stmt, err := db.Prepare(query)
+	// rows, err := stmt.Query(t, o)
+
 	logFatal(err)
 	defer rows.Close()
-
 	var v models.ReturnData
 
 	for rows.Next() {
 		var c models.Schedule
-
-		err = rows.Scan(&c.TRX_ID, &c.Org_id_pemasok, &c.Volume, &c.Thbl)
+		err := rows.Scan(&c.TRX_ID, &c.Org_id_pemasok, &c.Thbl, &c.Volume)
 		if err != nil {
 			v.Status = err.Error()
 		} else {
 			v.Status = "success"
 		}
-
 		v.Data = append(v.Data, c)
 	}
 
-	if err = rows.Err(); err != nil {
-		fmt.Println(err.Error())
-	}
-
 	return v
-
 }
+
+// GetScheuldeByOrgId
+// func (b ScheduleRepository) GetScheuldeByOrgId(db *sql.DB, vorg_id string, vthbl string) models.ReturnData {
+
+// 	// query := `select trx_id, org_id_pemasok, thbl, volume from "t_fl02a1" where "thbl"= and "org_id_pemasok"=$2`
+// 	query := "select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl='201811' and org_id_pemasok='20PBB'"
+// 	stmt, err := db.Prepare(query)
+// 	rows, err := stmt.Query()
+
+// 	// fmt.Println("stmt ", stmt)
+
+// 	// rows, err := db.Query("select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=? and org_id_pemasok=?", vthbl, vorg_id)
+// 	logFatal(err)
+// 	defer rows.Close()
+
+// 	fmt.Println("jml rows ", rows.)
+
+// 	var v models.ReturnData
+
+// 	for rows.Next() {
+// 		var c models.Schedule
+
+// 		err = rows.Scan(&c.TRX_ID, &c.Org_id_pemasok, &c.Volume, &c.Thbl)
+
+// 		fmt.Println(" TRX_ID ", c.TRX_ID)
+
+// 		if err != nil {
+// 			v.Status = err.Error()
+// 		} else {
+// 			v.Status = "success"
+// 		}
+
+// 		v.Data = append(v.Data, c)
+// 	}
+
+// 	// if err = rows.Err(); err != nil {
+// 	// 	fmt.Println(err.Error())
+// 	// }
+
+// 	return v
+
+// }

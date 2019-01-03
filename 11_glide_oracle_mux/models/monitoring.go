@@ -11,3 +11,8 @@ type Schedule struct {
 	Volume         string `json:"volume"`
 	Org_id_pemasok string `json:"org_id_pemasok"`
 }
+
+type Q struct {
+	Thbl           string `json:"thbl"`
+	Org_id_pemasok string `json:"org_id_pemasok"`
+}
