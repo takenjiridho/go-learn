@@ -12,7 +12,9 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/subosito/gotenv"
+
 	_ "gopkg.in/goracle.v2"
+	// _ "github.com/mattn/go-oci8"
 )
 
 var schedules []models.Schedule

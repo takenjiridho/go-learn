@@ -6,10 +6,10 @@ type ReturnData struct {
 }
 
 type Schedule struct {
-	TRX_ID         int    `json:"trx_id"`
-	Thbl           string `json:"thbl"`
-	Volume         string `json:"volume"`
-	Org_id_pemasok string `json:"org_id_pemasok"`
+	TRX_ID         float64 `json:"trx_id"`
+	Thbl           string  `json:"thbl"`
+	Volume         string  `json:"volume"`
+	Org_id_pemasok string  `json:"org_id_pemasok"`
 }
 
 type Q struct {

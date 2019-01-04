@@ -1,7 +1,12 @@
 package: go-learn/11_glide_oracle_mux
 import:
-- package: gopkg.in/goracle.v2
-  version: v2.11.0
 - package: github.com/subosito/gotenv
   version: v1.1.1
-# - package: github.com/mattn/go-oci8
+- package: github.com/go-kit/kit
+  version: v0.8.0
+  subpackages:
+  - log
+- package: gopkg.in/goracle.v2
+  version: v2.11.0
+- package: github.com/go-logfmt/logfmt
+  version: v0.4.0

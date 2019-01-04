@@ -4,7 +4,11 @@ import (
 	"database/sql"
 	"fmt"
 	"go-learn/11_glide_oracle_mux/models"
-	"log"
+
+	// "log"
+
+	_ "gopkg.in/goracle.v2"
+	// _ "github.com/mattn/go-oci8"
 )
 
 type ScheduleRepository struct{}
@@ -12,7 +16,7 @@ type ScheduleRepository struct{}
 func logFatal(err error) {
 	if err != nil && err != sql.ErrNoRows {
 		// log.Fatal(err)
-		log.Panic(err)
+		logFatal(err)
 	}
 }
 
@@ -44,17 +48,38 @@ func (b ScheduleRepository) GetScheuldeByOrgId(db *sql.DB, schedules []models.Sc
 	fmt.Println(" thbl : ", vthbl)
 	fmt.Println("org id :", vorg_id)
 
-	t := vthbl
-	o := vorg_id
+	// ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	// defer cancel()
 
-	// rows, err := db.Query("select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=? and org_id_pemasok=?", t, o)
+	// const qry = "SELECT * FROM user_tab_cols"
+	qry := "select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=:1 and org_id_pemasok= :2"
+	// cols, err := goracle.QueryContext(ctx, db, qry)
+	// if err != nil {
+	// 	logFatal(errors.Wrap(err, qry))
+	// }
+
+	fmt.Println(qry)
+
+	// thbl := vthbl
+	// org_id_pemasok := vorg_id
+
+	// db.QueryContext(goracle.ContextWithLog(ctx, logger.Log), qry)
+
+	// rows, err := db.Query("select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=$1", t)
 	// rows, err := db.Query("select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=? and org_id_pemasok='20PBB'", t)
-	rows, err := db.Query(fmt.Sprintf("select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=? and org_id_pemasok=?"), t, o)
+	// rows, err := db.Query("select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=:1 and org_id_pemasok=:2", t, o)
+	// rows, err := db.Query(fmt.Sprintf("select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=:1 and org_id_pemasok=:2"), t, o)
 
 	// query := "select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl=$1 and org_id_pemasok=$2"
 	// 	query := "select trx_id, org_id_pemasok, thbl, volume from t_fl02a1 where thbl='201811' and org_id_pemasok='20PBB'"
-	// stmt, err := db.Prepare(query)
-	// rows, err := stmt.Query(t, o)
+	rows, err := db.Query(qry, vthbl, vorg_id)
+	// rows = stmt.Query(t, o)
+
+	// db.QueryContext(goracle.ContextWithLog(ctx, logger.Log), qry)
+
+	// goracle.Log(rows)
+
+	// goracle.DescribeQuery(ctx, db, qry)
 
 	logFatal(err)
 	defer rows.Close()
