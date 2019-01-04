@@ -99,12 +99,13 @@ func (r *profileImpl) FindByID(id string) (*model.Profile, error) {
 
 }
 
-func (r *profileImpl) FindAll() (model.Profiles, error) {
-	query := `SELECT id, first_name, last_name, email, password, created_at, updated_at FROM "profile"`
+func (r *profileImpl) FindAll(id string, ln string) (model.Profiles, error) {
+	query := `SELECT id, first_name, last_name, email, password, created_at, updated_at FROM "profile" where "id"=$1 and "last_name"=$2`
+	// query := `SELECT id, first_name, last_name, email, password, created_at, updated_at FROM "profile"`
 
 	var profiles model.Profiles
 
-	rows, err := r.db.Query(query)
+	rows, err := r.db.Query(query, id, ln)
 
 	if err != nil {
 		return nil, err

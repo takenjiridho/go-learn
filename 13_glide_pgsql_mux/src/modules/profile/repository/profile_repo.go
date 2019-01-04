@@ -8,6 +8,6 @@ type ProfileRepository interface {
 	Save(*model.Profile) error
 	Update(string, *model.Profile) error
 	Delete(string, *model.Profile) error
-	FindAll() (*model.Profile, error)
+	FindAll(string) (*model.Profile, error)
 	FindByID(string) (*model.Profile, error)
 }
