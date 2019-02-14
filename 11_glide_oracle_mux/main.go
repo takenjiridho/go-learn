@@ -5,10 +5,9 @@ import (
 	"fmt"
 	"go-learn/11_glide_oracle_mux/controller"
 	"go-learn/11_glide_oracle_mux/driver"
-	"go-learn/11_glide_oracle_mux/models"
-
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 	"github.com/subosito/gotenv"
@@ -17,11 +16,15 @@ import (
 	// _ "github.com/mattn/go-oci8"
 )
 
-var schedules []models.Schedule
+//var schedules []models.Schedule
 var db *sql.DB
 
 func init() {
+
+	fmt.Println("load init")
 	gotenv.Load()
+
+	fmt.Println("get oracle env " + os.Getenv("ORACLE_URL"))
 }
 
 func logFatal(err error) {
@@ -31,6 +34,7 @@ func logFatal(err error) {
 }
 
 func main() {
+
 	fmt.Println("glide oracle mux port 8000")
 	db, err := driver.ConnectDB()
 	logFatal(err)
