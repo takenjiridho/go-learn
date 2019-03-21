@@ -1,4 +1,4 @@
 .DS_Store
 05_glide_pgsql/vendor/
 */vendor/
-*/.env
+*/*/.env
